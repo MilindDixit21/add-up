@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Ruthie&display=swap');
+*{box-sizing:border-box;} /* accomodate content to the actual width*/
+body {font-size:100;text-align: center;}
+h3 {    margin: 0 auto 0;
+	width:50%;
+    font-family: sans-serif;
+    color: darkmagenta;
+    font-size: 50px;
+    position: relative;}
+h3:before {
+    content: "";
+    height: 15px;
+    background: #f9f9f9;
+    width: 50%;
+    left: 25%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    z-index: -1;
+    display: none;
+}
+#myForm {padding:2% 5% 0%; text-align:center;}
+#operationGround{ width: 50%; min-height: 150px; margin: 0 auto; border: 3px solid #c3c3c3; border-radius: 25px 25px 0 0;}
+#operation { width: 56%; text-align: right;}
+#myAnswer {display:block;border: 4px solid #353535;border-radius: 0 0 25px  25px;padding: 10px 20px;font-size: 100;font-family: inherit;width: 50%; text-align: center; margin: 0 auto;}
+#myAnswer:focus {
+    outline: none;
+    border-color: #b0a0d8!important;
+}
+.correct { color:#25bd25;}
+.correct:before {
+    font-family: 'FontAwesome';
+    content: "\f118";
+    font-size: 30px;
+    padding-right: 10px;
+    color: #25bd25;
+}
+.incorrect:before {
+    font-family: 'FontAwesome';
+    content: "\f119";
+    font-size: 30px;
+    padding-right: 10px;
+    color: red;
+}
+.incorrect { color:black; display:inline-block;}
+#notification{ font-size: 0.3em;padding: 5px 0; height: auto; width: auto;margin: 0px auto;}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0;}
+input[type=number] { -moz-appearance: textfield;}
+button, #chkBtn, #nxtBtn { font-size:0.4em!important; margin-top: 8px; padding:5px 35px; background:#3e8f14; color:white; border:3px solid lightgray;}
+#chkBtn {width: 50%; background-color: #11527a;border-radius: 20px;}
+#nxtBtn {width: 50%; display:none; background:black; border-radius: 20px; }
+button#nxtBtn:focus,
+button#chkBtn:focus{
+    outline: 1px solid lightseagreen;
+    border: 4px solid lightgray;
+    border-bottom-color: #79a49b;
+    border-right-color: #79a49b;
+}
+/* .operationSign { font-size: 50px; font-family: sans-serif; padding: 0 20px; display:block;}*/
+.operationSign {font-size: 50px; font-family: sans-serif; padding: 0px 20px 0; display: block; margin-right: 170px; /*position: relative; margin-bottom: -90px;*/ z-index:-1;}
+.operationSign:after{content: "+"; position: absolute;margin-top:32px;}
+#score, #totalQs {
+    font-size: 20px;
+    font-family: verdana;
+    margin-top: 20px;
+	display:inline-block;
+}
+
+.ml2 {
+  font-weight: 900;
+  font-size: 1.0em;
+  color:#ffcd00;
+  margin-top: 140px;
+  font-family: cursive;
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+#passingCertificate {margin: 0;
+    padding: 0;
+    line-height: 1;
+    position: absolute;
+    background: #1f1009 url(1.gif) no-repeat center center /50%;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+	font-size: 100px;
+	line-height:200px;
+	z-index:999;
+}
+#pass:after {
+    content: "Congratulations!!!";
+    display: block;
+    color: #fff;
+}
+#resultSc{border-radius: 0 0 28% 28%;
+    border: 0px solid white;
+    background: rgb(138 46 42 / 23%);
+    width: auto;
+    display: inline-block;
+    padding: 20px 5px;
+    font-size: 40px;
+    line-height: 140px;
+    font-family: cursive;
+    position: absolute;
+    top: 32%;
+    left: 45%;
+    color: #fff;
+    width: 160px;
+    height: 202px;}
+
+#close {cursor:pointer;font-size:30px;line-height:40px;color:#fff;background:red;height:40px;width:40px;border-radius:10%;box-shadow:3px 3px 6px #000;position:absolute;right:30px; top:30px;z-index:999;}
+#resultIcon:after { font-size:400px; content:"\01F3C6";position:absolute;left:35.5%; top:44%;}
+#clock { position: relative; right: 0; top: 0px; height: 120px; }
+#clock h6 {     margin: 0;
+    text-align: center;
+    font-size: 30px;
+    background: lightgoldenrodyellow;
+    padding: 9px;
+    border-radius: 0px;
+}
+#clock h6:before {
+    font-family: fontawesome;
+    content: "\f017";
+    margin-right: 5px;
+    font-weight: 100;
+    font-size: 30;
+    color: rgb(129 145 115 / 80%);
+    padding: 10px;
+    line-height: 0;
+}
+#timeTaken {color: #8bc34a;
+    position: absolute;
+    left: 40%;
+    bottom: 5%;
+    height: 60px;
+    font-size: 30px;
+    line-height: 20px;
+    font-family: cursive;
+    background: #fff;
+    outline: 2px solid #8f8d8d;
+    outline-offset: -5px;
+    width: 20%;
+    display: inline-block;
+    padding: 20px;}
+#timeTaken:before {font-family: fontawesome;
+    content: "\f017";
+    color: #6d6b6b;
+    font-size: 33px;
+    padding-right: 10px;
+    padding: 5px 15px 5px 5px;}
+	
+#pName{ font-family: 'Ruthie', cursive;
+	margin: 0;
+    padding: 0;
+    color: #fff;
+	font-weight: 100;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 0px;
+	text-shadow: 2px 2px 8px #f2a803;}
+	
+#restartBtn {
+    float: right;
+    position: fixed;
+    right: 0;
+	font-size:30px!important;
+	line-height: 40px;
+    top: 410px;
+    border-left: 0px;
+    background: #11527a;
+    border-radius: 42px 0 0 42px;
+    padding: 8px 70px 8px 20px;
+    transition: padding .8s;
+	outline: none!important;
+}
+#restartBtn:hover {
+    padding-right: 150px;
+}
+#restartBtn:before {
+    content: "\f11e";
+    font-family: 'FontAwesome';
+    font-size: 30px;
+    display: inline-block;
+    margin-right: 20px;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform .8s;
+    transition: transform .8s;
+}
+#restartBtn.reset:before {
+    content: "\f021";
+}
+#restartBtn:hover:before {
+    -webkit-transform: rotate(450deg);
+    transform: rotate(360deg);
+}
+  .recordTime {
+    font-family: system-ui;
+    color: white;
+    background:rgb(129 145 115 / 80%);
+    padding: 10px;
+    font-size: 0.25em;
+    line-height: 1.2em;
+    position: fixed;
+    right: 7px;
+    top: 9px;
+}
+.recordTime:before{content:"Today's Record Time ";}
+
+.personName {
+    font-family: system-ui;
+    color: white;
+    background: rgb(129 145 115 / 80%);
+    padding: 10px;
+    font-size: 0.25em;
+    line-height: 1.2em;
+    position: fixed;
+    left: 7px;
+    top: 9px;
+}
+
+div#totalQs:before {
+    display: inline-block;
+    /* content: "/"; */
+}
+.marks,.highMarks{
+    background: #765858;
+    color: #ffffff;
+    font-size: 25px;
+    padding: 10px;
+	display: inline-block;
+    margin-top: 20px;
+    font-family: cursive;
+	border-radius:10px;
+	float: right;
+    clear: both;
+	width:200px;}
+.marks:before {
+    content: "Score: ";
+}
+.highMarks:before {
+    content: "Highscore: ";
+}
+.btnWrapper{display:inline-block;}
+.cName {
+    font-size: 22px;
+    line-height: 30px;
+    font-family: cursive;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 10px;
+    background: lightgray;
+    border-radius: 30px 30px 0 0;
+    height: 100px;
+    margin-top: 30px;
+}
+.cName:before {
+    content: "\f2be";
+    font-family: 'FontAwesome';
+    color: #8a8db5;
+    font-size: 50px;
+    display: block;
+    margin: -30px auto 10px;
+}

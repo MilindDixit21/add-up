@@ -1,0 +1,272 @@
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+  <link rel="stylesheet" href="style.css"> 
+  
+  <style>
+  #restartBtn {float:left;}
+
+
+  </style>
+</head>
+<body>
+
+<div id="passingCertificate" style="display:none">
+<div id="close" onclick="closeCert()">X</div>
+<div id="resultIcon"></div>
+<h1 class="ml2">Congratulations!!!</h1>
+<h5 id="pName"></h5>
+<p id="resultSc"></p>
+<div id="timeTaken"></div>
+</div>
+
+<div id="clock">
+<span class="personName"></span>
+<h6><time>00:00:00</time></h6>
+<button id="start" style="visibility:hidden;font-size: 1px!important;">start</button>
+<button id="stop" style="visibility:hidden;font-size: 1px!important;">stop</button>
+<button id="clear" style="visibility:hidden;font-size: 1px!important;">clear</button>
+<span class="recordTime">0</span>
+</div>
+
+<h3>Addition</h3>
+<form name="myForm" id="myForm" action="#">
+	<div id="operationGround"><div id="operation" style="visibility: hidden;"></div></div>
+	<p id="notification"></p>
+	<input id="myAnswer" name="answer" type="text" />
+	
+	
+	<button class="button" id="chkBtn" name="button" type="button" onclick="checkAnswer()" style="display: none;">SUBMIT</button>
+	<button class="button" id="nxtBtn" name="button" type="button" onclick="generateQuestions()" >Next Question</button>
+	<div class="scoreWrap"><div id="score">score: 0</div><div id="totalQs">0</div></div>
+</form>
+<button class="button" id="restartBtn" type="button">Start</button>
+
+<script>
+	document.getElementById("restartBtn").onclick = function() {
+		let currText = document.getElementById("restartBtn").innerText;
+		if(currText == "Start"){
+			gameStart();
+		}else{
+			restart();
+		}
+		};
+</script>
+
+
+<script>
+ let x, y;
+ let score = 0;
+ let totalQuestions = 0;
+ let recordTime = "0";
+//  let inputAns = document.getElementById("myAnswer").value;
+
+
+   var person = prompt("Please enter your name","Hi there!");
+   document.querySelector(".personName").innerText = "Hello "+ person+"!";
+
+ function generateNumbers(){
+ 
+	 function getRandomNumber1(){
+		return Math.trunc(Math.random() * 99) + 1;
+	 }
+	 function getRandomNumber2(){
+		return Math.trunc(Math.random() * 99) + 1;
+	 }
+	 x = getRandomNumber1();
+	 y = getRandomNumber2();	
+ }
+ 
+ function generateQuestions(){
+   generateNumbers();
+	document.getElementById('operation').innerHTML = x + "<span class='operationSign'></span>" + y;
+	let ansKey = x + y;
+  	console.log(`correct answer is ${ansKey}`);
+	
+	document.getElementById('myAnswer').value = '';
+	document.getElementById('notification').value = '';
+	
+	document.getElementById("notification").innerHTML =" ";
+	document.getElementById("chkBtn").style.display = "inline-block";
+	document.getElementById("nxtBtn").style.display = "none";
+ }
+ 
+ function checkAnswer() {
+	totalQuestions++
+	document.getElementById("totalQs").innerHTML = "/" + totalQuestions;
+
+     if(x + y === +document.getElementById('myAnswer').value){
+	 document.getElementById("myAnswer").style.borderColor = "green";
+	 document.getElementById("notification").innerHTML = "<div class='correct'>CORRECT</div>";
+	document.getElementById("chkBtn").style.display = "none";;
+	document.getElementById("nxtBtn").style.display = "inline-block";
+	
+	score++ //this will increase score by 1 each time
+	console.log(`score :${score}`);
+	document.getElementById("score").innerHTML =  "score:" + score;
+	document.getElementById("score").style.color = "green";
+	
+	if(score == 10){
+	document.getElementById("passingCertificate").style.display = "block";
+	document.getElementById("resultSc").innerHTML = score+"/"+totalQuestions;
+	//document.getElementById("resultIcon").innerText = String.fromCodePoint(0x1F354);
+	//document.getElementById("score").innerHTML = "score: 0";
+	//document.getElementById("totalQs").innerHTML = "/0";
+	document.getElementById("timeTaken").innerHTML = h6.textContent;
+	document.getElementById("pName").innerHTML = person;
+	
+	let currentRT = document.querySelector(".recordTime").innerText;
+	if(currentRT == 0){
+		document.querySelector(".recordTime").textContent = h6.textContent;
+	}else{
+		if (currentRT > h6.textContent){
+			document.querySelector(".recordTime").textContent = h6.textContent;
+		}else{
+			return null;
+		}
+	}
+		
+	clearTimeout(t);
+	
+	}
+	 }
+	 else{
+	document.getElementById("myAnswer").style.borderColor = "red";
+	document.getElementById("notification").innerHTML = "<div class='incorrect'><span style='color:red'>WRONG!</span> correct answer is </div> " + (x + y);
+	document.getElementById("chkBtn").style.display = "none";
+	document.getElementById("nxtBtn").style.display = "inline-block";	
+	
+/*
+	score-- //this will decrease score by 1 each time
+	console.log(`score :${score}`);
+	document.getElementById("score").innerHTML = "score :" + score;
+	document.getElementById("score").style.color = "red";	
+	*/
+	}
+     //document.getElementById('notification').value = x * y;
+}
+
+//   generateQuestions();
+ 
+</script>
+
+<script>
+function gameStart(){
+	generateQuestions();
+	document.getElementById("chkBtn").style.display ="inline-block";
+	document.getElementById("operation").style.visibility ="visible";
+
+	var inputAnswer = document.getElementById("myAnswer");
+	inputAnswer.focus();
+	inputAnswer.addEventListener("keypress", function(event){
+	if(event.key === "Enter"){ 
+		// alert("enter key pressed");
+		event.preventDefault();
+		document.getElementById("chkBtn").click();
+		document.getElementById("nxtBtn").click();
+	}
+});
+	timer();
+	document.getElementById("restartBtn").innerText = "Reset";
+	document.getElementById("restartBtn").classList.add("Reset");
+}
+
+</script>
+
+<script>
+ function restart(){
+ score = 0;
+ totalQuestions = 0;
+	generateQuestions();
+   document.querySelector("#notification").textContent = " ";
+   document.querySelector("#score").textContent = score;
+	document.querySelector("#totalQs").textContent = totalQuestions;
+	h6.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+	timer(t);
+   }
+</script>
+
+<script>
+// Wrap every letter in a span
+let textWrapper = document.querySelector('.ml2');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml2 .letter',
+    scale: [4,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 950,
+    delay: (el, i) => 70*i
+  }).add({
+    targets: '.ml2',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+  </script>
+  <script>
+  var h6 = document.getElementsByTagName('h6')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    h6.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+// timer();
+
+/* Start button */
+start.onclick = timer;
+
+/* Stop button */
+stop.onclick = function() {
+    clearTimeout(t);
+}
+
+/* Clear button */
+clear.onclick = function() {
+    h6.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}
+  </script>
+  
+  <script>
+  document.getElementById('myAnswer').addEventListener('keyup', e => {
+  console.log('Caret at: ', e.target.selectionStart)
+});
+
+function closeCert(){
+ 	//window.location.reload();
+	document.getElementById('passingCertificate').style.display = "none";
+	document.getElementById("nxtBtn").style.display = "none";
+	document.getElementById("restartBtn").innerText = "Reset";
+	restart();
+	clearTimeout(t);
+}
+  </script>
+  
+</body>
